@@ -1,0 +1,85 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 22.04.0 ] */
+/* [wxMaxima: title   start ]
+Lotka-Volterra-Gleichungen
+   [wxMaxima: title   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Die Lotka-Volterra-Gleichungen (auch als Räuber-Beute-Gleichungen bekannt) sind ein System aus zwei nichtlinearen, gekoppelten Differentialgleichungen erster Ordnung. Sie beschreiben die Wechselwirkung von Räuber- und Beutepopulationen. Unter Räuber und Beute sind dabei zwei Klassen von Lebewesen gemeint, wobei die eine sich von der anderen ernährt. Aufgestellt wurden die Gleichungen 1925 von Alfred J. Lotka und, unabhängig davon, 1926 von Vito Volterra.
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: comment start ]
+Die Gleichungen lauten:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+g1: 0.5*x - 0.0333*x*y;
+g2: -1.0*y + 0.01*x*y;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Startwerte:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+B0: 100;
+R0: 45;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+tMax: 50;
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Lösung durch Runge-Kutta:
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+result: rk([g1, g2], [x, y], [B0, R0], [t, 0, tMax, 0.01])$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+lit: map(first, result)$
+liB: map(second, result)$
+liR: map(third, result)$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+set_draw_defaults(point_type=0, point_size=0, points_joined=true,
+color=red, grid=true);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(points(lit, liR), color=green, points(lit, liB))$
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+Phasendiagramm (Die y-Achse zeigt die Anzahl der Räuber-, die x-Achse die Anzahl der Beutetiere):
+   [wxMaxima: comment end   ] */
+
+
+/* [wxMaxima: input   start ] */
+wxdraw2d(points(liB, liR));
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: input   start ] */
+;
+/* [wxMaxima: input   end   ] */
+
+
+
+/* Old versions of Maxima abort on loading files that end in a comment. */
+"Created with wxMaxima 22.04.0"$
